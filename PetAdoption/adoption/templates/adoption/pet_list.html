@@ -1,0 +1,23 @@
+{% extends 'adoption/base.html' %}
+{% block title %}Available Pets{% endblock %}
+{% block page_content %}
+<div class="">
+    <p class="text-center mb-14 text-4xl not-italic">Pets for Adoption</p>
+    <p class="mb-7">
+        <a href="{% url 'pet_create' %}">Add a new pet</a>
+    </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {% for pet in pets %}
+                    {% if pet.photo %}
+                        <div>
+                            <a href="{% url 'pet_detail' pet.id %}">
+                                <img class="size-40 rounded-lg transition-transform duration-500 transform hover:scale-125 mb-5" src="{{ pet.photo.url }}" alt="">
+                            </a>
+                            <a class="font-bold text-blue-500" href="{% url 'pet_detail' pet.id %}">{{ pet.name }}</a> - {{ pet.species }} 
+                        </div>
+                    {% endif %}
+            {% endfor %}
+        </div>
+</div>
+
+{% endblock %}
