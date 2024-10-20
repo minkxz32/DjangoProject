@@ -1,8 +1,61 @@
 
-<h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Pet</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-<a href="{% url 'pet_list' %}">Cancel</a>
+{% extends 'adoption/base.html' %}
+{% block title %}Available Pets{% endblock %}
+{% block page_content %}
+
+    <form method="post" enctype="multipart/form-data" class="max-w-2xl mx-auto space-y-6 dark:bg-gray-900  pb-20 border-b border-gray-200 dark:border-gray-600 w-full bg-white rounded-lg">
+        {% csrf_token %}
+        {% if form.instance.pk %}
+            <a href="{% url 'pet_detail' pet_id=pet.id %}" class="text-blue-500 font-bold float-right text-2xl hover:text-blue-800"><<</a>
+        {% else %}
+            <a href="{% url 'pet_list' %}" class="text-blue-500 font-bold float-right text-2xl hover:text-blue-800"><<</a>
+        {% endif %}
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            {% if form.instance.pk %}Edit Pet Information{% else %}Pet Details Form{% endif %}
+        </h1>
+        <!-- Name Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.name }}
+            <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pet Name</label>
+        </div>
+      
+        <!-- Species Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.species }}
+            <label for="species" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Species</label>
+        </div>
+      
+        <!-- Breed Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.breed }}
+            <label for="breed" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Breed</label>
+        </div>
+      
+        <!-- Age Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.age }}
+            <label for="age" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Age</label>
+        </div>
+      
+        <!-- Description Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.description }}
+            <label for="description" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
+        </div>
+      
+        <!-- Available Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.available }}
+            <label for="available" class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Available for Adoption</label>
+        </div>
+      
+        <!-- Photo Field -->
+        <div class="relative z-0 w-full mb-5 group">
+            {{ form.photo }}
+            <label for="photo" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Photo</label>
+        </div>
+      
+        <!-- Submit Button -->
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{% if form.instance.pk %}UPDATE{% else %}SUBMIT{% endif %}</button>
+      </form>
+{% endblock %}

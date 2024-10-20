@@ -38,7 +38,7 @@ def pet_update(request, pet_id):
             return redirect('pet_list')
     else:
         form = PetForm(instance=pet)
-    return render(request, 'adoption/pet_form.html', {'form': form})
+    return render(request, 'adoption/pet_form.html', {'pet': pet,'form': form})
 
 @login_required
 def pet_delete(request, pet_id):
