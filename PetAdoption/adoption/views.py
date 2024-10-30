@@ -18,15 +18,19 @@ def pet_detail(request, pet_id):
 @login_required
 def pet_create(request):
     if request.method == "POST":
-        form = PetForm(request.POST, request.FILES)  # Include request.FILES
+        form = PetForm(request.POST, request.FILES)  # Include request.FILES to handle file uploads
         if form.is_valid():
             pet = form.save(commit=False)
             pet.owner = request.user  # Set the pet's owner to the logged-in user
             pet.save()
-            return redirect('pet_list')
+            return redirect('pet_list')  # Redirect to the pet list page after saving
+        else:
+            print(form.errors)  # Debug: print form errors to console
     else:
-        form = PetForm()
-    return render(request, 'adoption/pet_form.html', {'form': form})
+        form = PetForm()  # Initialize a blank form for GET requests
+
+    return render(request, 'adoption/pet_form.html', {'form': form})  # Render the pet form template
+
 
 @login_required
 def pet_update(request, pet_id):

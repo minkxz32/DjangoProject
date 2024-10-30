@@ -81,10 +81,29 @@ WSGI_APPLICATION = 'PetAdoption.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pet_adoption_db',
+        'USER': 'root',  # Typically 'root' for local installations
+        'PASSWORD': '',  # The password you set during installation
+        'HOST': 'localhost',  # Or 'localhost'
+        'PORT': '3306',  # Default MySQL port
+        'OPTIONS': {
+            'ssl': {
+                'ca': 'C:/xampp/mysql/mysql_keys/ca-cert.pem',
+                'cert': 'C:/xampp/mysql/mysql_keys/client-cert.pem',
+                'key': 'C:/xampp/mysql/mysql_keys/client-key.pem',
+            }
+        }
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 
 
 # Password validation
